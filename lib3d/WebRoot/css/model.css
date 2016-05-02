@@ -1,0 +1,5 @@
+.container {width:60%;}
+.modelPreview {background:yellow; width:100%; height:400px;}
+.modelPreview img {width:100%; height:100%;}
+.header {height:30px; line-height:30px;}
+#download {margin-bottom:10px;}
