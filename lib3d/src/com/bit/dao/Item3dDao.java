@@ -41,7 +41,7 @@ public class Item3dDao {
 			item.setName(rs.getString("name"));
 //			item.setKeywords(rs.getString(""));
 			item.setLoadtimes(rs.getInt("loadtimes"));
-			System.out.println(item);
+			System.out.println(item.getDetail());
 			list.add(item);
 		}
 		return list;
@@ -55,8 +55,7 @@ public class Item3dDao {
 			keywords.add("3d");
 			keywords.add("哈哈1");
 			dao.searchKeyWords(co, keywords);
-			
-			dao.insertItem(co, 2, "add", "aa", "a", "hhh哈哈哈13d","aaaa");
+//			dao.insertItem(co, 2, "add", "aa", "a", "hhh哈哈哈13d","aaaa");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

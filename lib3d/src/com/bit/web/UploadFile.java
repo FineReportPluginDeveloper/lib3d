@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -17,9 +19,10 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.bit.dao.Item3dDao;
+import com.bit.uti.DbUtil;
+
 public class UploadFile extends HttpServlet {
-	
-	
 	
 	//修改文件
 	@Override
@@ -42,33 +45,32 @@ public class UploadFile extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		String filename="";
+		String picname="";
+		String name="";
+		String detail;
+		String keywords ;
 		//得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
         String savefilePath = this.getServletContext().getRealPath("/uploadfile");
         String savepicPath = this.getServletContext().getRealPath("/uploadpic");
         File file = new File(savefilePath);
         //判断上传文件的保存目录是否存在
         if (!file.exists() && !file.isDirectory()) {
-            System.out.println(savefilePath+"目录不存在，需要创建");
-            //创建目录
             file.mkdir();
         }file = new File(savepicPath);
         //判断上传文件的保存目录是否存在
         if (!file.exists() && !file.isDirectory()) {
-            System.out.println(savepicPath+"目录不存在，需要创建");
-            //创建目录
             file.mkdir();
         }
         //读取字段值
-        String filename1 = req.getParameter("filename");
-        String keywords = req.getParameter("keywords");
+        name = req.getParameter("name");
+        keywords = req.getParameter("keywords");
 //        String picname = req.getParameter("pi");
-        String detail = req.getParameter("detail");
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
-        String picname = df.format(new Date()).toString();
+        detail = req.getParameter("detail");
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+        String time = df.format(new Date()).toString();
         
         //消息提示
-        String message = "";
-        
         try{
             //使用Apache文件上传组件处理文件上传步骤：
             //1、创建一个DiskFileItemFactory工厂
@@ -89,23 +91,25 @@ public class UploadFile extends HttpServlet {
                 if(item.isFormField()){
                 }else{//如果fileitem中封装的是上传文件
                     //得到上传的文件名称，
-                    String filename = item.getName();
-                    System.out.println(filename);
-                    if(filename==null || filename.trim().equals("")){
+                    String upfilename = item.getName();
+                    System.out.println(upfilename);
+                    if(upfilename==null || upfilename.trim().equals("")){
                         continue;
                     }
                     //注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的，如：  c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt
                     //处理获取到的上传文件的文件名的路径部分，只保留文件名部分
-                    filename = filename.substring(filename.lastIndexOf("\\")+1);
+//                    upfilename = upfilename.substring(upfilename.lastIndexOf("\\")+1);
                     //获取item中的上传文件的输入流
                     InputStream in = item.getInputStream();
                     //创建一个文件输出流
-                    String suf = filename.substring(filename.lastIndexOf(".")+1);
+                    String suf = upfilename.substring(upfilename.lastIndexOf(".")+1);
                     String savePath ="";
                     if("amf".equals(suf)||"stl".equals(suf)){
-                    	savePath = savefilePath + picname + "."+ suf;
+                    	filename = time+"."+suf;
+                    	savePath = savefilePath +"\\"+ filename;
                     }else{
-                    	savePath = savepicPath + picname + "."+ suf;
+                    	picname = time+"."+suf;
+                    	savePath = savefilePath +"\\"+ picname;
                     }
                     FileOutputStream out = new FileOutputStream(savePath);
                     //创建一个缓冲区
@@ -123,22 +127,32 @@ public class UploadFile extends HttpServlet {
                     out.close();
                     //删除处理文件上传时生成的临时文件
                     item.delete();
-                    message = "文件上传成功！";
                 }
             }
-            
+            //将条目存入数据库中
+            Item3dDao dao = new Item3dDao();
+            DbUtil db = new DbUtil();
+    		try {
+    			Connection con = db.getCon();
+    			dao.insertItem(con, 0, filename, picname, detail, keywords, name);
+    		} catch (Exception e) {
+    			// TODO Auto-generated catch block
+    			System.out.println("存入数据库出错");
+    			e.printStackTrace();
+    		}
         }catch (Exception e) {
-            message= "文件上传失败！";
+            PrintWriter wr = resp.getWriter();
+            wr.write("fail");
+            wr.flush();
             e.printStackTrace();
             
         }
-        
-        req.setAttribute("message",message);
-        req.getRequestDispatcher("/test/message.jsp").forward(req, resp);
+        PrintWriter wr = resp.getWriter();
+        wr.write("success");
+        wr.flush();
+//        req.setAttribute("message",message);
+//        req.getRequestDispatcher("/test/message.jsp").forward(req, resp);
 
-        
-        
-        
 	}
 
 	

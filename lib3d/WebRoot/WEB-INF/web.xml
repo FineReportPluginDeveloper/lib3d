@@ -18,7 +18,15 @@
 	    <url-pattern>/servlet/UploadHandleServlet</url-pattern>
 	</servlet-mapping>
 
-
+	<servlet>
+	    <servlet-name>UploadFile</servlet-name>
+	    <servlet-class>com.bit.web.UploadFile</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	    <servlet-name>UploadFile</servlet-name>
+	    <url-pattern>/servlet/UploadFile</url-pattern>
+	</servlet-mapping>
 
 
   
