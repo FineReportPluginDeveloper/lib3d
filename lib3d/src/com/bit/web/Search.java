@@ -31,13 +31,13 @@ public class Search extends HttpServlet {
 			keywords.add(word[i]);
 		}
 		Item3dDao dao = new Item3dDao();
-        DbUtil db = new DbUtil();
 		try {
-			Connection con = db.getCon();
-			List<Item3d> result = dao.searchKeyWords(con, keywords);
+			List<Item3d> result = dao.searchKeyWords(keywords);
 			req.setAttribute("result", result);
 			
+			
 		} catch (Exception e) {
+			
 			// TODO Auto-generated catch block
 			System.out.println("存入数据库出错");
 			e.printStackTrace();

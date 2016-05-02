@@ -131,10 +131,8 @@ public class UploadFile extends HttpServlet {
             }
             //将条目存入数据库中
             Item3dDao dao = new Item3dDao();
-            DbUtil db = new DbUtil();
     		try {
-    			Connection con = db.getCon();
-    			dao.insertItem(con, 0, filename, picname, detail, keywords, name);
+    			dao.insertItem(0, filename, picname, detail, keywords, name);
     		} catch (Exception e) {
     			// TODO Auto-generated catch block
     			System.out.println("存入数据库出错");
