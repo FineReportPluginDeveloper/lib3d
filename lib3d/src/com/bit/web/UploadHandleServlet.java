@@ -51,6 +51,11 @@ public class UploadHandleServlet extends HttpServlet {
                             String value = item.getString("UTF-8");
                             //value = new String(value.getBytes("iso8859-1"),"UTF-8");
                             System.out.println(name + "=" + value);
+                            
+                            
+                            
+                            
+                            
                         }else{//如果fileitem中封装的是上传文件
                             //得到上传的文件名称，
                             String filename = item.getName();

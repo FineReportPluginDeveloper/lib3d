@@ -28,7 +28,6 @@ public class CharacterEncodingFilter implements Filter {
 		// TODO Auto-generated method stub
 		String encoding= config.getInitParameter("encoding");
 		if(null!=encoding&&!"".equals(encoding)){
-//			System.out.println("??????????"+encoding);
 			arg0.setCharacterEncoding(encoding);
 			arg1.setCharacterEncoding(encoding);
 		}

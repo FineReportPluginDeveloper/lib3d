@@ -1,3 +1,8 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!doctype html>
 <html>
 <head>
@@ -9,28 +14,29 @@
 <meta name="baidu-site-verification" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
-<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
 <!-- 自定义样式 -->
-<link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/model.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/model.css">
 </head>
 <body>
 
 <div class="container">
 <div class="row">
 	<div class="col-md-3">
-		<h1>{模型名}</h1>
+		<h1>${item.name }</h1>
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-lg-8">
 		<div class="modelPreview">
-			<img src="{模型图片地址}">
+			<img src="uploadpic/${item.picname }">
 		</div>
 	</div>
 	<div class="col-lg-4">
 		<div class="modelDescription">
+			${item.detail }
 			{这是一个3D模型，哈哈哈哈哈，你可以假装看不见，也可以偷偷地想念。}
 		</div>
 		<hr>
@@ -52,7 +58,7 @@
 		</div>
 		<hr>
 		<a type="button" class="btn btn-primary btn-lg" id="download" href="{下载地址}">下载模型文件 ({文件大小} KB)</a>
-		<a type="button" class="btn btn-default btn-lg" href="http://localhost/webgl/view.jsp?url=<%">3D预览</a>
+		<a type="button" class="btn btn-default btn-lg" href="{3D预览地址}">3D预览</a>
 	</div>
 	<hr>
 </div>
@@ -60,8 +66,8 @@
 </div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="/js/jquery.min.js"></script>
+	<script src="js/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="/js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

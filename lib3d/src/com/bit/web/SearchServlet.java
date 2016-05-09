@@ -1,6 +1,7 @@
 package com.bit.web;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +15,15 @@ import com.bit.bean.Item3d;
 import com.bit.dao.Item3dDao;
 import com.bit.uti.DbUtil;
 
-public class Search extends HttpServlet {
+public class SearchServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String words = req.getParameter("keywords");
+		System.out.println("keywords=" + words);
+//		words = new String(words.getBytes("iso8859-1"),"gb2312");
+		System.out.println("keywords=" + words);
 		String[] word ;
 		if(words.contains(",")){
 			word = words.split(",");
@@ -33,8 +37,8 @@ public class Search extends HttpServlet {
 		Item3dDao dao = new Item3dDao();
 		try {
 			List<Item3d> result = dao.searchKeyWords(keywords);
-			req.setAttribute("result", result);
-			
+			req.setAttribute("results", result);
+			System.out.println(result.size());
 			
 		} catch (Exception e) {
 			
@@ -42,12 +46,13 @@ public class Search extends HttpServlet {
 			System.out.println("存入数据库出错");
 			e.printStackTrace();
 		}
-		req.getRequestDispatcher("/result.jsp").forward(req, resp);
+		req.getRequestDispatcher("/jsp/list.jsp").forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		doGet(req, resp);
 	}
 	
 	

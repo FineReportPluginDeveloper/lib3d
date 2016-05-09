@@ -5,8 +5,18 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
   <display-name></display-name>
- 
-
+   <welcome-file-list>
+    <welcome-file>/jsp/home.jsp</welcome-file>
+  </welcome-file-list>
+<servlet>
+	    <servlet-name>View</servlet-name>
+	    <servlet-class>com.bit.web.View</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	    <servlet-name>View</servlet-name>
+	    <url-pattern>/view</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 	    <servlet-name>UploadHandleServlet</servlet-name>
@@ -25,10 +35,40 @@
 	
 	<servlet-mapping>
 	    <servlet-name>UploadFile</servlet-name>
-	    <url-pattern>/servlet/UploadFile</url-pattern>
+	    <url-pattern>/upload</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+	    <servlet-name>SearchServlet</servlet-name>
+	    <servlet-class>com.bit.web.SearchServlet</servlet-class>
+	</servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>LoadTimes</servlet-name>
+    <servlet-class>com.bit.web.LoadTimes</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ClassSearchServlet</servlet-name>
+    <servlet-class>com.bit.web.ClassSearchServlet</servlet-class>
+  </servlet>
 
+
+	
+	<servlet-mapping>
+	    <servlet-name>SearchServlet</servlet-name>
+	    <url-pattern>/search</url-pattern>
+	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoadTimes</servlet-name>
+    <url-pattern>/loadtimes</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ClassSearchServlet</servlet-name>
+    <url-pattern>/classSearch</url-pattern>
+  </servlet-mapping>
   
 	 <filter>
 		<filter-name>characterencoding</filter-name>
@@ -38,6 +78,7 @@
 		<param-value>UTF-8</param-value>
 		</init-param>
 	</filter>
+
 
 
 	<filter-mapping>
