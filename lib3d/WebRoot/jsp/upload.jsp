@@ -32,13 +32,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="form-group">
 			<label for="modelName" class="col-sm-4 control-label">请填写模型名称</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="modelName" name="name" placeholder="">
+				<input type="text" required="required" class="form-control" id="modelName" name="name" placeholder="">
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="modelClassification" class="col-sm-4 control-label">请选择模型分类</label>
 			<div class="col-sm-6">
-				<select class="form-control" id="modelClassification" name="modeltype">
+				<select class="form-control" required="required" id="modelClassification" name="modeltype">
 					<option>人物</option>
 					<option>玩具</option>
 					<option>建筑</option>
@@ -48,25 +48,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="form-group">
 			<label for="uploadModel" class="col-sm-4 control-label">上传模型文件</label>
 			<div class="col-sm-6">
-				<input id="uploadModel" type="file" class="file" name="uploadModel" data-preview-file-type="text">
+				<input id="uploadModel" type="file" required="required" class="file" name="uploadModel" data-preview-file-type="text">
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="uploadModelPicture" class="col-sm-4 control-label">上传模型图片</label>
 			<div class="col-sm-6">
-				<input id="uploadModelPicture" type="file" class="file" name="picname" data-preview-file-type="text">
+				<input id="uploadModelPicture" required="required" type="file" class="file" name="picname" data-preview-file-type="text">
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="modelDescription" class="col-sm-4 control-label">模型详细介绍</label>
 			<div class="col-sm-6">
-				<textarea class="form-control" rows="4" id="modelDescription" name="detail"></textarea>
+				<textarea class="form-control" required="required" rows="4" id="modelDescription" name="detail"></textarea>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="modelTags" class="col-sm-4 control-label">模型标签</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" id="modelTags" name="keywords">
+				<input type="text" class="form-control" required="required" id="modelTags" name="keywords">
 				<span id="helpBlock" class="help-block">（以空格或英文逗号分隔。如：建筑,别墅）</span>
 			</div>
 		</div>
