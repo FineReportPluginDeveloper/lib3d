@@ -1,4 +1,8 @@
-﻿.container li{
+.img-rounded {margin:0 auto; margin-top:100px; text-align:center;}
+.img-rounded img {width:100px; height:100px;}
+.img-rounded span {font-size: 2em; vertical-align: middle;}
+
+.container li{
 margin: 0px;
 padding: 5px;
 width: 154px;

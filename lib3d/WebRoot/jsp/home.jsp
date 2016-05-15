@@ -42,7 +42,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 </div>
 
-<img src="logo2.png" class="img-rounded" style="display:block; margin:0 auto; margin-top:100px;">
+<div class="img-rounded">
+<img src="<%=basePath %>images/logo.jpg">
+<span><strong>3D库</strong></span>
+</div>
 
 <div class="row" style="">
 	<div class="col-lg-3"></div>
